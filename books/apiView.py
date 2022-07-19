@@ -53,9 +53,19 @@ class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
+    def get_queryset(self):
+        if self.request.user.username:
+            return Book.objects.all()
+        return None
+
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+
+    def get_queryset(self):
+        if self.request.user.username:
+            return Review.objects.all()
+        return None
 
 class ReadingBookViewSet(viewsets.ModelViewSet):
     queryset = ReadingBook.objects.all()
