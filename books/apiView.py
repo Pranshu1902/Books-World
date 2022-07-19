@@ -56,7 +56,7 @@ class BookViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         if self.request.user.username:
             return Book.objects.all()
-        return None
+        raise Exception('You must be logged in to view reviews')
 
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
@@ -65,7 +65,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         if self.request.user.username:
             return Review.objects.all()
-        return None
+        raise Exception('You must be logged in to view reviews')
 
 class ReadingBookViewSet(viewsets.ModelViewSet):
     queryset = ReadingBook.objects.all()
