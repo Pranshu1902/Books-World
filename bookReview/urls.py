@@ -16,13 +16,37 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from books.views import *
+from django.contrib.auth.views import LogoutView
+from rest_framework import routers
+from books.apiView import *
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+from rest_framework.authtoken import views
+
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
+
+router = routers.SimpleRouter(trailing_slash=True)
+
+router.register("api/books", BookViewSet, basename="books")
+router.register("api/reviews", ReviewViewSet, basename="reviews")
+router.register("api/reading", ReadingBookViewSet, basename="readingbooks")
+
 
 urlpatterns = [
+    path('api', SpectacularAPIView.as_view(), name="schema"),
+    path('api/swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('api/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+
+    path('api-token-auth/', views.obtain_auth_token),
+
     path('admin/', admin.site.urls),
     path('', ListBooksView.as_view()),
     path('create_book/', CreateBookView.as_view()),
     path('login/', UserLoginView.as_view()),
+    path('logout/', LogoutView.as_view()),
     path('signup/', UserSignUpView.as_view()),
     path('create_review/', CreateReviewView.as_view()),
     path('reviews/', ViewReviewsView.as_view()),
-]
+] + router.urls + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
