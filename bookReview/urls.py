@@ -43,7 +43,8 @@ urlpatterns = [
     path('api/user/', CurrentUserView.as_view(), name="user"),
 
     path('admin/', admin.site.urls),
-    path('', ListBooksView.as_view()),
+    path('', HomePageView.as_view()),
+    path('home/', ListBooksView.as_view()),
     path('create/', CreateBookView.as_view()),
     path('login/', UserLoginView.as_view()),
     path('logout/', LogoutView.as_view()),

@@ -43,3 +43,10 @@ class ListBooksView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Book.objects.filter(user=self.request.user)
+
+# home page view
+class HomePageView(ListView):
+    model = Book
+    template_name = "homePage.html"
+    context_object_name = "book"
+    login_url = "/login/"
