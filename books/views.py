@@ -1,6 +1,3 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
-from django.views import View
 from django.views.generic.edit import CreateView
 from django.forms import ModelForm
 from books.models import Book
