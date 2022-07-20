@@ -9,13 +9,13 @@ from rest_framework.response import Response
 class BookSerializer(ModelSerializer):
     class Meta:
         model = Book
-        fields = ['name', 'description', 'author', 'date_started', 'date_finishe', 'comments', 'reading']
+        fields = ['name', 'description', 'author', 'date_started', 'date_finished', 'comments', 'reading']
         read_only_fields = ['user']
     
     # automatically assign the user to the transaction
     def validate(self, attrs):
-        user = User.objects.filter(username=self.context['request'].user)[0]
-        attrs['user'] = user
+        # user = User.objects.filter(username=self.context['request'].user)[0]
+        attrs['user'] = self.context['request'].user
         return attrs
 
 class UserSerializer(ModelSerializer):

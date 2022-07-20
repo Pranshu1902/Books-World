@@ -30,6 +30,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, Sp
 router = routers.SimpleRouter(trailing_slash=True)
 
 router.register("api/books", BookViewSet, basename="books")
+router.register("user", APIUserViewSet, basename="user")
 
 
 urlpatterns = [
@@ -43,7 +44,7 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
     path('', ListBooksView.as_view()),
-    path('create_book/', CreateBookView.as_view()),
+    path('create/', CreateBookView.as_view()),
     path('login/', UserLoginView.as_view()),
     path('logout/', LogoutView.as_view()),
     path('signup/', UserSignUpView.as_view()),

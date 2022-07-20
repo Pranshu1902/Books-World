@@ -1,6 +1,7 @@
 from django.views.generic.edit import CreateView
 from django.forms import ModelForm
 from books.models import Book
+from django.http import HttpResponseRedirect
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
@@ -20,37 +21,25 @@ class UserSignUpView(CreateView):
 class BooksForm(ModelForm):
     class Meta:
         model = Book
-        fields = ['name', 'description', 'author']
+        fields = ['name', 'description', 'author', 'reading', 'date_finished', 'comments']
+    
 
 class CreateBookView(LoginRequiredMixin, CreateView):
     form_class = BooksForm
     template_name = "create_book.html"
     success_url = "/"
 
+    def form_valid(self, form):
+        form.save()
+        self.object = form.save()
+        self.object.user = self.request.user
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
 class ListBooksView(LoginRequiredMixin, ListView):
     model = Book
     template_name = "home.html"
     context_object_name = "books"
 
-# class ReviewForm(LoginRequiredMixin, ModelForm):
-#     class Meta:
-#         model = Review
-#         fields = ['review', 'rating', 'book']
-
-# class CreateReviewView(LoginRequiredMixin, CreateView):
-#     form_class = ReviewForm
-#     template_name = "create_review.html"
-#     success_url = "/"
-
-#     def form_valid(self, form):
-#         form.save()
-#         self.object = form.save()
-#         self.object.reviewer = self.request.user
-#         self.object.save()
-#         return HttpResponseRedirect(self.get_success_url())
-
-# class ViewReviewsView(ListView):
-#     model = Review
-#     template_name = "view_reviews.html"
-#     context_object_name = "reviews"
-#     paginate_by = 10
+    def get_queryset(self):
+        return Book.objects.filter(user=self.request.user)
