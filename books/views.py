@@ -21,7 +21,7 @@ class UserSignUpView(CreateView):
 class BooksForm(ModelForm):
     class Meta:
         model = Book
-        fields = ['name', 'description', 'author', 'reading', 'date_finished', 'comments']
+        fields = ['name', 'author']
     
 
 class CreateBookView(LoginRequiredMixin, CreateView):

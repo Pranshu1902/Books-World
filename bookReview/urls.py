@@ -31,6 +31,7 @@ router = routers.SimpleRouter(trailing_slash=True)
 
 router.register("api/books", BookViewSet, basename="books")
 router.register("user", APIUserViewSet, basename="user")
+router.register("comment", CommentViewSet, basename="comment")
 
 
 urlpatterns = [
