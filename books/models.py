@@ -11,6 +11,7 @@ STATUS_CHOICES = (
 )
 
 class Book(models.Model):
+    id = models.UUIDField(primary_key=True, unique=True)
     name = models.CharField(max_length=255)
     author = models.CharField(max_length=255)
     image = models.ImageField(default="default.png", upload_to="book_images")

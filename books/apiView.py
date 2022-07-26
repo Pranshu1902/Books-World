@@ -9,7 +9,7 @@ from rest_framework.response import Response
 class BookSerializer(ModelSerializer):
     class Meta:
         model = Book
-        fields = ['name', 'author', 'image', 'totalPages', 'pagesRead', 'timeTaken', 'status']
+        fields = ['id', 'name', 'author', 'image', 'totalPages', 'pagesRead', 'timeTaken', 'status']
         read_only_fields = ['user']
     
     # automatically assign the user to the transaction
