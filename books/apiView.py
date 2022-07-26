@@ -12,7 +12,7 @@ class BookSerializer(ModelSerializer):
         fields = ['id', 'name', 'author', 'image', 'totalPages', 'pagesRead', 'timeTaken', 'status']
         read_only_fields = ['user']
     
-    # automatically assign the user to the transaction
+    # automatically assign the user to the book
     def validate(self, attrs):
         # user = User.objects.filter(username=self.context['request'].user)[0]
         attrs['user'] = self.context['request'].user
@@ -21,8 +21,14 @@ class BookSerializer(ModelSerializer):
 class CommentSerializer(ModelSerializer):
     class Meta:
         model = Comment
-        fields = ['text', 'created_at']
-        read_only_fields = ['user', 'book']
+        fields = ['text', 'created_at', 'book'] # book is sent to the client to filter the comments based on book
+        read_only_fields = ['user']
+    
+    # automatically assign the user to the comment
+    def validate(self, attrs):
+        # user = User.objects.filter(username=self.context['request'].user)[0]
+        attrs['user'] = self.context['request'].user
+        return attrs
 
 class UserSerializer(ModelSerializer):
     class Meta:
