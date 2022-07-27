@@ -1,6 +1,7 @@
 from email.policy import default
 from django.db import models
 from django.contrib.auth.models import User
+import uuid
 
 # Create your models here.
 
@@ -11,7 +12,7 @@ STATUS_CHOICES = (
 )
 
 class Book(models.Model):
-    id = models.UUIDField(primary_key=True, unique=True)
+    id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255)
     author = models.CharField(max_length=255)
     image = models.ImageField(default="default.png", upload_to="book_images")
