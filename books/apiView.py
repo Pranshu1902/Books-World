@@ -33,7 +33,7 @@ class CommentSerializer(ModelSerializer):
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'password']
+        fields = ['id', 'username', 'password']
 
     # sign up new user
     def create(self, validated_data):
