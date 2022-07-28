@@ -14,14 +14,14 @@ STATUS_CHOICES = (
 class Book(models.Model):
     name = models.CharField(max_length=255)
     author = models.CharField(max_length=255)
-    image = models.ImageField(default="default.png", upload_to="book_images")
-    imageLink = models.CharField(max_length=1255, default="static/default.png")
+    imageLink = models.CharField(max_length=2255, default="static/default.png")
     user = models.ForeignKey(User, related_name="books", on_delete=models.CASCADE, null=True, blank=True)
     totalPages = models.IntegerField(default=0)
     pagesRead = models.IntegerField(default=0)
     timeTaken = models.IntegerField(default=0)
     status = models.CharField(max_length=100, choices=STATUS_CHOICES, default=STATUS_CHOICES[0][0])
 
+    # image = models.ImageField(default="default.png", upload_to="book_images")
     # id = models.UUIDField(primary_key=True, unique=True)#, default=uuid.uuid4, editable=False)
     # reading = models.BooleanField(default=False)
     # date_started = models.DateField(auto_now_add=True, null=True, blank=True)
