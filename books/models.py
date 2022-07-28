@@ -20,6 +20,7 @@ class Book(models.Model):
     pagesRead = models.IntegerField(default=0)
     timeTaken = models.IntegerField(default=0)
     status = models.CharField(max_length=100, choices=STATUS_CHOICES, default=STATUS_CHOICES[0][0])
+    
     # image = models.ImageField(default="default.png", upload_to="book_images")
     # id = models.UUIDField(primary_key=True, unique=True)#, default=uuid.uuid4, editable=False)
     # reading = models.BooleanField(default=False)
