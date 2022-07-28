@@ -15,6 +15,7 @@ class Book(models.Model):
     name = models.CharField(max_length=255)
     author = models.CharField(max_length=255)
     image = models.ImageField(default="default.png", upload_to="book_images")
+    imageLink = models.CharField(max_length=255, default="static/default.png")
     user = models.ForeignKey(User, related_name="books", on_delete=models.CASCADE, null=True, blank=True)
     totalPages = models.IntegerField(default=0)
     pagesRead = models.IntegerField(default=0)
