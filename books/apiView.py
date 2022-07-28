@@ -21,7 +21,7 @@ class BookSerializer(ModelSerializer):
 class CommentSerializer(ModelSerializer):
     class Meta:
         model = Comment
-        fields = ['text', 'created_at', 'book'] # book is sent to the client to filter the comments based on book
+        fields = ['id', 'text', 'created_at', 'book'] # book is sent to the client to filter the comments based on book
         read_only_fields = ['user']
     
     # automatically assign the user to the comment
