@@ -14,7 +14,7 @@ STATUS_CHOICES = (
 class Book(models.Model):
     name = models.CharField(max_length=255)
     author = models.CharField(max_length=255)
-    imageLink = models.CharField(max_length=3500, default="none")
+    imageLink = models.CharField(max_length=3500, default="http://books-world-pranshu1902.herokuapp.com/static/default.png")
     user = models.ForeignKey(User, related_name="books", on_delete=models.CASCADE, null=True, blank=True)
     totalPages = models.IntegerField(default=0)
     pagesRead = models.IntegerField(default=0)
